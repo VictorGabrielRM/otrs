@@ -247,9 +247,11 @@ sub PerlInfoGet {
             CGI
             Class::Inspector
             Crypt::PasswdMD5
+            Crypt::Random::Source
             CSS::Minifier
             Email::Valid
             Encode::Locale
+            Exporter::Tiny
             IO::Interactive
             JavaScript::Minifier
             JSON
@@ -259,8 +261,12 @@ sub PerlInfoGet {
             LWP
             Mail::Address
             Mail::Internet
+            Math::Random::ISAAC
+            Math::Random::Secure
             MIME::Tools
+            Module::Find
             Module::Refresh
+            Moo
             Mozilla::CA
             Net::IMAP::Simple
             Net::HTTP
@@ -270,8 +276,10 @@ sub PerlInfoGet {
             Sys::Hostname::Long
             Text::CSV
             Text::Diff
+            Types::TypeTiny
             YAML
             URI
+            namespace::clean
             )
             )
         {

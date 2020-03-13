@@ -1,8 +1,47 @@
-#6.0.27 ????-??-??
+#6.0.28 ????-??-??
+ - 2020-03-13 Fixed bug#[15017](https://bugs.otrs.org/show_bug.cgi?id=15017) - Untranslated strings in PGP status information.
+ - 2020-03-12 Improved download of the private and public keys and certificates (S/MIME and PGP).
+ - 2020-03-11 Fixed bug#[14956](https://bugs.otrs.org/show_bug.cgi?id=14956) - Add new key/value pair to the Hash element doesn't render proper element in SysConfig.
+ - 2020-03-10 Fixed bug#[13657](https://bugs.otrs.org/show_bug.cgi?id=13657) - Duplicate entry for ticket seen flag.
+ - 2020-03-06 Fixed bug#[13761](https://bugs.otrs.org/show_bug.cgi?id=13761) - All long description fields in processes are text fields, but the line break will ignored.
+ - 2020-03-02 Fixed bug#[15005](https://bugs.otrs.org/show_bug.cgi?id=15005) - The service view does not work well with more than 10 000 tickets.
+ - 2020-03-02 Fixed bug#[14975](https://bugs.otrs.org/show_bug.cgi?id=14975) - Ticket Timeline View - Event Type Filter 'Save as default' is not a global setting.
+ - 2020-03-02 Fixed bug#[14930](https://bugs.otrs.org/show_bug.cgi?id=14930) - ACL Match Setting 'Frontend' causes a problem with changing in Type, Queue, Service or SLA.
+
+#6.0.27 2020-03-27
+ - 2020-03-12 Updated translations, thanks to all translators.
+ - 2020-03-03 Improved random number generator.
+  We added new CPAN dependencies, which should already be present on all systems:
+    Crypt::Random::Source
+    Exporter::Tiny
+    Math::Random::ISAAC
+    Math::Random::Secure
+    Module::Find
+    Moo
+    Types::TypeTiny
+    namespace::clean
+
+ - 2020-03-03 Improved token handling in the LostPassword requests.
+ - 2020-02-28 Fixed bug#[14752](https://bugs.otrs.org/show_bug.cgi?id=14752) - In the ticket create screen, system always preselects first valid certificate for signature/encryption.
+  In this case, system should preselect default certificate, or the one with the newest/longest valid certificate.
+ - 2020-02-28 Fixed bug#[14949](https://bugs.otrs.org/show_bug.cgi?id=14949) - PostMaster X-OTRS-AttachmentExists filter is activated on email with embedded images.
+ - 2020-02-28 Fixed bug#[13103](https://bugs.otrs.org/show_bug.cgi?id=13103) - Items in admin favorites are sorted by id instead of alphabetically.
+ - 2020-02-28 Fixed bug#[14953](https://bugs.otrs.org/show_bug.cgi?id=14953) - System logs an error when email contains utf-8 characters while trying to create a gravatar link.
+ - 2020-02-28 Fixed bug#[14952](https://bugs.otrs.org/show_bug.cgi?id=14952) - From field is not consistent if article is created by note compared to the bulk note add (in agent interface).
+ - 2020-02-27 Fixed bug#[14988](https://bugs.otrs.org/show_bug.cgi?id=14988) - The edit button in 'Assigned Transition Actions' table doesn't work (in Transition Actions).
+ - 2020-02-27 Fixed bug#[14987](https://bugs.otrs.org/show_bug.cgi?id=14987) - InvalidUserCleanup generates tons of useless entries in the ticket history.
+ - 2020-02-27 Fixed bug#[14982](https://bugs.otrs.org/show_bug.cgi?id=14982) - Filter for CustomerIDs with special characters break the page.
+ - 2020-02-26 Fixed bug#[14774](https://bugs.otrs.org/show_bug.cgi?id=14774) - AdminGenericAgent matches first ticket close time instead of last.
+  The issue occurs when the ticket is reopened and then closed again - system matches first close time.
+ - 2020-02-25 Fixed bug#[14944](https://bugs.otrs.org/show_bug.cgi?id=14944) - Changing Ticket Number Generator causes ExternalTicketNumberRecognition to fail.
+  Therefore system creates a new ticket instead of appending the article to the existing one.
+ - 2020-02-19 Fixed bug#[14974](https://bugs.otrs.org/show_bug.cgi?id=14974) - Untranslated string in appointment calendar.
  - 2020-02-14 Fixed bug#[14963](https://bugs.otrs.org/show_bug.cgi?id=14963) - Mails are not signed in compose screens.
- - 2020-02-14 Fixed bug#[14926](https://bugs.otrs.org/show_bug.cgi?id=14926) - Tag <OTRS_EMAIL_DATE[]> in Templates does not work correctly.
- - 2020-02-14 Fixed bug#[14932](https://bugs.otrs.org/show_bug.cgi?id=14932) - The tag reference does not work in a Generic Agent job if the ticket has no CustomerID.
+  If an S/MIME certificate is set for signing and encrypting outgoing mails, it is not used for signing in Compose answers. For new Email tickets, E-Mail Outbound and Forward the emails are signed correctly. Furthermore, if "sign and encrypt" is chosen, the mail will only be encrypted, but not signed.
+ - 2020-02-14 Fixed bug#[14926](https://bugs.otrs.org/show_bug.cgi?id=14926) - OTRS tag <OTRS_EMAIL_DATE[]> in Templates does not work correctly.
+ - 2020-02-14 Fixed bug#[14932](https://bugs.otrs.org/show_bug.cgi?id=14932) - OTRS tag is not replaced in a Generic Agent job if the ticket has no CustomerID.
  - 2020-02-12 Fixed bug#[14960](https://bugs.otrs.org/show_bug.cgi?id=14960) - Incorrect language file loading.
+ OTRS loads wrong language files if the user uses a top-level language file like 'es' or 'fr' where also country variants exist (e. g. "es_MX") and the user has packages with translation files installed.
  - 2020-02-11 Added a new SysConfig setting 'DisableLoginAutocomplete' - when enabled, it disables autocomplete in the login forms.
    System adds autocomplete="off" attribute to the login input fields. Note that some browsers ignore it by default (usually it can be changed in the browser configuration).
  - 2020-02-10 Fixed bug#[14773](https://bugs.otrs.org/show_bug.cgi?id=14773) - Invalid characters in Perl Modules section on AdminSupportDataCollector screen.
@@ -10,10 +49,10 @@
  - 2020-02-07 Fixed bug#[14967](https://bugs.otrs.org/show_bug.cgi?id=14967) - The accounted time is missing in the generic interface TicketGet documentation of API.
  - 2020-02-06 Fixed bug#[14833](https://bugs.otrs.org/show_bug.cgi?id=14833) - Citation conversion to plain text is broken.
  - 2020-02-05 Improved From field handling in the Email action screens.
- - 2020-02-05 Fixed bug#[14858](https://bugs.otrs.org/show_bug.cgi?id=14858) - Not possible to transfer value "0" via web service to dynamic field.
+ - 2020-02-05 Fixed bug#[14858](https://bugs.otrs.org/show_bug.cgi?id=14858) - It's not possible to transfer value "0" via web service to dynamic field.
  - 2020-02-05 Fixed bug#[14203](https://bugs.otrs.org/show_bug.cgi?id=14203) - GET method processes entity-body message from request.
  - 2020-02-05 Follow-up fix for bug#[10825](https://bugs.otrs.org/show_bug.cgi?id=10825) - <OTRS_CUSTOMER_Body> in Reply-Template.
- Re-added tags which were marked as not supported in previous fix.
+  Re-added tags which were marked as not supported in previous fix.
 
 #6.0.26 2020-02-07
  - 2020-01-23 Updated translations, thanks to all translators.

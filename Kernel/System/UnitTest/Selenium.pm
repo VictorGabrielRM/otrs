@@ -120,7 +120,10 @@ sub new {
     eval {
         $Self = $Class->SUPER::new(
             webelement_class => 'Kernel::System::UnitTest::Selenium::WebElement',
-            error_handler    => \&SeleniumErrorHandler,
+            error_handler    => sub {
+                my $Self = shift;
+                return $Self->SeleniumErrorHandler(@_);
+            },
             %SeleniumTestsConfig
         );
     };
@@ -136,6 +139,10 @@ sub new {
 
         $Self = $Class->SUPER::new(
             webelement_class => 'Kernel::System::UnitTest::Selenium::WebElement',
+            error_handler    => sub {
+                my $Self = shift;
+                return $Self->SeleniumErrorHandler(@_);
+            },
             %SeleniumTestsConfig
         );
     }
@@ -636,7 +643,7 @@ sub HandleError {
     my ( $Self, $Error ) = @_;
 
     # If we really have a selenium error, get the stack trace for it.
-    if ( $Error eq $Self->{_SeleniumException} && $Self->{_SeleniumStackTrace} ) {
+    if ( $Self->{_SeleniumStackTrace} && $Error eq $Self->{_SeleniumException} ) {
         $Error .= "\n" . $Self->{_SeleniumStackTrace};
     }
 
